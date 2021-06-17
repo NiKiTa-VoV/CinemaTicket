@@ -14,17 +14,15 @@ namespace CinemaTicket
 {
     public partial class FormFilm : Form
     {
-        Ticket _ticket;
         DateTime _dateSession;
         Film _film;
         string _session;
-        public FormFilm(ref Ticket ticket)
+        public FormFilm()
         {
-            this._ticket = ticket;
             InitializeComponent();
 
             comboBoxFilm.Items.Clear();
-            foreach (var filmName in ticket.Cinema.Films.Keys)
+            foreach (var filmName in Ticket.Cinema.Films.Keys)
             {
                 comboBoxFilm.Items.Add(filmName);
             }
@@ -38,8 +36,7 @@ namespace CinemaTicket
         }
         private void comboBoxFilm_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Film film;
-            if (_ticket.Cinema.Films.TryGetValue((string)comboBoxFilm.SelectedItem, out film))
+            if (Ticket.Cinema.Films.TryGetValue((string)comboBoxFilm.SelectedItem, out var film))
             {
                 _session = null;
                 comboBoxSession.Items.Clear();
@@ -53,7 +50,7 @@ namespace CinemaTicket
                     "Описание: " + film.Description + Environment.NewLine + Environment.NewLine +
                     "Дата выхода: " + film.DateRelease;
 
-                this._film = film;
+                _film = film;
             }
         }
         private void comboBoxSession_SelectedIndexChanged(object sender, EventArgs e)
@@ -64,10 +61,10 @@ namespace CinemaTicket
         {
             if (_film != null && _session != null)
             {
-                _ticket.Date = _dateSession;
-                _ticket.Film = _film;
-                _ticket.Session = _session;
-                FormTicket formTicket = new(ref _ticket);
+                Ticket.Date = _dateSession;
+                Ticket.Film = _film;
+                Ticket.Session = _session;
+                FormTicket formTicket = new();
                 formTicket.Show();
             }
             else

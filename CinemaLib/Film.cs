@@ -5,28 +5,22 @@ namespace CinemaLib
 {
     public class Film
     {
-        string _description;
-        string _dataRelease;
-        string _name;
-        List<string> _sessions = new List<string>();
-
-
         public Film(string name)
         {
-            this._name = name;
+            Name = name;
         }
         [JsonPropertyName("name")]
-        public string Name { get => _name; set => _name = value; }
+        public string Name { get; set; }
         [JsonPropertyName("description")]
-        public string Description { get => _description; set => _description = value; }
+        public string Description { get; set; }
         [JsonPropertyName("release-date")]
-        public string DateRelease { get => _dataRelease; set => _dataRelease = value; }
+        public string DateRelease { get; set; }
         [JsonPropertyName("sessions")]
-        public List<string> Sessions { get => _sessions; set => _sessions = value; }
+        public List<string> Sessions { get; set; } = new List<string>();
 
         public void AddTime(string time)
         {
-            _sessions.Add(time);
+            Sessions.Add(time);
         }
     }
 }

@@ -16,44 +16,37 @@ namespace CinemaTicket
     {
         private const string DefaultLabelCheque = "Ваш чек на фильм: ";
 
-        public FormСheque(ref Ticket ticket)
+        public FormСheque()
         {
-            this.Ticket = ticket;
             InitializeComponent();
             saveFileDialogCheque.DefaultExt = "txt";
             saveFileDialogCheque.AddExtension = true;
             saveFileDialogCheque.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             saveFileDialogCheque.FileName = "Чек.txt";
             labelCheque.Text = DefaultLabelCheque;
-            labelCheque.Text += ticket.Film.Name;
+            labelCheque.Text += Ticket.Film.Name;
             textBoxСheque.Text = "";
             textBoxСheque.Text =
                 "Чек" + Environment.NewLine
-                + "Название города:  " + ticket.City.Name + Environment.NewLine
-                + "Название кинотеатр:  " + ticket.Cinema.Name + Environment.NewLine
-                + "Название фильма:  " + ticket.Film.Name + Environment.NewLine
-                + "Дата сеанса:  " + ticket.Date.ToString("dd.MM.yyyy") + Environment.NewLine
-                + "Время сеанса:  " + ticket.Session + Environment.NewLine
-                + "Ряд:  " + ticket.Row + "    Место:  " + ticket.Place + Environment.NewLine
-                + "Стоимость билета:  " + ticket.Price + " руб.";
+                + "Название города:  " + Ticket.City.Name + Environment.NewLine
+                + "Название кинотеатр:  " + Ticket.Cinema.Name + Environment.NewLine
+                + "Название фильма:  " + Ticket.Film.Name + Environment.NewLine
+                + "Дата сеанса:  " + Ticket.Date.ToString("dd.MM.yyyy") + Environment.NewLine
+                + "Время сеанса:  " + Ticket.Session + Environment.NewLine
+                + "Ряд:  " + Ticket.Row + "    Место:  " + Ticket.Place + Environment.NewLine
+                + "Стоимость билета:  " + Ticket.Price + " руб.";
         }
-
-        public Ticket Ticket { get; set; }
 
         private void buttonSaveCheque_Click(object sender, EventArgs e)
         {
             if (saveFileDialogCheque.ShowDialog() == DialogResult.OK)
-            {
                 File.WriteAllText(saveFileDialogCheque.FileName, textBoxСheque.Text);
-            }
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Вы точно сохранили чек?", @"Закрыть", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
                 Application.Exit();
-            }
         }
     }
 }
