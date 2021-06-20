@@ -109,5 +109,10 @@ namespace CinemaTicket
                 FormСheque formСheque = new();
                 formСheque.Show();
         }
+
+        private void pictureBoxHall_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

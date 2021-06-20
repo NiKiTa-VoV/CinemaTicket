@@ -51,6 +51,7 @@
             this.pictureBoxHall.Size = new System.Drawing.Size(762, 205);
             this.pictureBoxHall.TabIndex = 0;
             this.pictureBoxHall.TabStop = false;
+            this.pictureBoxHall.Click += new System.EventHandler(this.pictureBoxHall_Click);
             // 
             // labelRyad
             // 
